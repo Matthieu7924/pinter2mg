@@ -16,6 +16,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Pin
 {
 
+    use Timestampable;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -27,11 +29,7 @@ class Pin
     #[ORM\Column(length: 255)]
     private ?string $description = null;
 
-    #[ORM\Column(type: "datetime_immutable", options: ["default" => "CURRENT_TIMESTAMP"])]
-    private ?\DateTimeImmutable $createdAt = null;
 
-    #[ORM\Column(type: "datetime_immutable", options: ["default" => "CURRENT_TIMESTAMP"])]
-    private ?\DateTimeImmutable $updatedAt = null;
 
     public function getId(): ?int
     {
@@ -62,29 +60,7 @@ class Pin
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
-    {
-        return $this->createdAt;
-    }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): static
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeImmutable
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
 
     #[ORM\PrePersist]
     #[ORM\PreUpdate]
