@@ -12,6 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class PinsController extends AbstractController
@@ -135,6 +136,19 @@ class PinsController extends AbstractController
         ]);
     }
 
+    #[Route('/pins/{id}', name: 'app_pins_delete', methods: ['POST','DELETE'])]
+    public function delete(Request $request, EntityManagerInterface $em, int $id, PinRepository $pinRepository, CsrfTokenManagerInterface $csrfTokenManager): Response
+    {
+
+        $pin = $pinRepository->find($id);
+
+        $em->remove($pin);
+        $em->flush();
+        $this->addFlash('info', 'Pin successfully deleted');
+
+
+        return $this->redirectToRoute('app_home');
+    }
 
 
 
