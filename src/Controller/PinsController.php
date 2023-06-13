@@ -110,7 +110,7 @@ class PinsController extends AbstractController
     }
 
     //EDIT
-    #[Route('/pins/{id}/edit', name: 'app_pins_edit', methods: ['GET' ,'PUT', 'POST'])]
+    #[Route('/pins/{id}/edit', name: 'app_pins_edit', methods: ['PUT', 'POST'])]
     
     public function edit(Request $request, EntityManagerInterface $em, int $id, PinRepository $pinRepository):Response
     {
@@ -136,8 +136,8 @@ class PinsController extends AbstractController
         ]);
     }
 
-    #[Route('/pins/{id}', name: 'app_pins_delete', methods: ['POST','DELETE'])]
-    public function delete(Request $request, EntityManagerInterface $em, int $id, PinRepository $pinRepository, CsrfTokenManagerInterface $csrfTokenManager): Response
+    #[Route('/pins/{id}', name: 'app_pins_delete', methods: ['DELETE','POST'])]
+    public function delete(Request $request, Pin $pin, EntityManagerInterface $em, int $id, PinRepository $pinRepository, CsrfTokenManagerInterface $csrfTokenManager): Response
     {
 
         $pin = $pinRepository->find($id);
