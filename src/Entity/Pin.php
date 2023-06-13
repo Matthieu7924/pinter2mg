@@ -18,7 +18,6 @@ use Vich\UploaderBundle\Entity\File as EmbeddedFile;
 #[ORM\Entity(repositoryClass: PinRepository::class)]
 #[ORM\Table(name: "pins")]
 #[ORM\HasLifecycleCallbacks]
-// #[Vich\Uploadable]
 /**
  * @ORM\Entity
  * @Vich\Uploadable
@@ -47,11 +46,36 @@ class Pin
     private ?string $imageName = null;
 
     // NOTE: This is not a mapped field of entity metadata, just a simple property.
-    // #[UploadableField(mapping: 'pin_image', fileNameProperty: 'imageName', size: 'imageSize')]
     /**
- * @Vich\UploadableField(mapping="pin_image", fileNameProperty="imageName", size="imageSize")
- */
+     * @Vich\UploadableField(mapping="pin_image", fileNameProperty="imageName", size="imageSize")
+     */
     private ?File $imageFile = null;
+
+    /**
+     * @var int|null
+     *
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $imageSize;
+
+    public function __construct()
+    {
+        // Initialiser la propriété imageSize avec une valeur par défaut si nécessaire
+        $this->imageSize = 0;
+    }
+
+    public function getImageSize(): ?int
+    {
+        return $this->imageSize;
+    }
+
+    public function setImageSize(?int $imageSize): self
+    {
+        $this->imageSize = $imageSize;
+
+        return $this;
+    }
+
 
 
 
