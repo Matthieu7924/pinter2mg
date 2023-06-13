@@ -33,6 +33,9 @@ class Pin
     #[Assert\Length(min: 10, minMessage: 'La description doit contenir au moins 10 caractères')]
     private ?string $description = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $imageName = null;
+
 
 
     public function getId(): ?int
@@ -76,6 +79,18 @@ class Pin
         }
         $this->setUpdatedAt(new DateTimeImmutable());
 
+    }
+
+    public function getImageName(): ?string
+    {
+        return $this->imageName;
+    }
+
+    public function setImageName(?string $imageName): static
+    {
+        $this->imageName = $imageName;
+
+        return $this;
     }
 
 }
