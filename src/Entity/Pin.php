@@ -2,17 +2,27 @@
 
 namespace App\Entity;
 
-use App\Entity\Traits\Timestampable;
-use App\Repository\PinRepository;
 use DateTimeImmutable;
-use Doctrine\ORM\Mapping as ORM;
+use Vich\UploadableField;
 use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\Mapping as ORM;
+use App\Repository\PinRepository;
+use App\Entity\Traits\Timestampable;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
 use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Entity\File as EmbeddedFile;
 
 
 #[ORM\Entity(repositoryClass: PinRepository::class)]
 #[ORM\Table(name: "pins")]
 #[ORM\HasLifecycleCallbacks]
+// #[Vich\Uploadable]
+/**
+ * @ORM\Entity
+ * @Vich\Uploadable
+ */
 class Pin
 {
 
@@ -35,6 +45,35 @@ class Pin
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $imageName = null;
+
+    // NOTE: This is not a mapped field of entity metadata, just a simple property.
+    // #[UploadableField(mapping: 'pin_image', fileNameProperty: 'imageName', size: 'imageSize')]
+    /**
+ * @Vich\UploadableField(mapping="pin_image", fileNameProperty="imageName", size="imageSize")
+ */
+    private ?File $imageFile = null;
+
+
+
+    /**
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $imageFile
+     */
+    public function setImageFile(?File $imageFile = null): void
+    {
+        $this->imageFile = $imageFile;
+
+        if (null !== $imageFile) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->setUpdatedAt(new \DateTimeImmutable);
+        }
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
 
 
 
