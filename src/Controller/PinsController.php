@@ -110,7 +110,7 @@ class PinsController extends AbstractController
     }
 
     //EDIT
-    #[Route('/pins/{id}/edit', name: 'app_pins_edit', methods: ['PUT', 'POST'])]
+    #[Route('/pins/{id}/edit', name: 'app_pins_edit', methods: ['GET', 'PUT','POST'])]
     
     public function edit(Request $request, EntityManagerInterface $em, int $id, PinRepository $pinRepository):Response
     {

@@ -7,13 +7,10 @@
 
     {% for pin in pins %}
             <article>
-            <h2><a href="{{ path('app_pins_show', {id: pin.id} )}}">{{ pin.title }}</a></h2>
-            {# <h2>{{ pin.title }}</h2> #}
-            <p>{{ pin.description }}</p>
-                {# <h2><a href="{{ path('app_pins_show', {id: pin.id}) }}">{{ pin.title }}</a></h2>
-                <p>{{pin.description|u.truncate(50, '...', false) }}</p> #}
-                {# <p>Crée {{ pin.createdAt|date }}#}
-                {# <p>Crée {{ pin.createdAt|ago }} #}
+                <h2><a href="{{ path('app_pins_show', {id: pin.id}) }}">{{ pin.title }}</a></h2>
+                <p>{{pin.description|u.truncate(50, '...', false) }}</p>
+                {# <p>Crée {{ pin.createdAt|date }} #}
+                <p>Crée {{ pin.createdAt|ago }}
             </article>
     {% endfor %}
 {% endblock %}
