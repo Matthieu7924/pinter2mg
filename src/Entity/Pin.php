@@ -24,9 +24,13 @@ class Pin
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"il faut un titre")]
+    #[Assert\Length(min: 3)]
     private ?string $title = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 10, minMessage: 'La description doit contenir au moins 10 caractères')]
     private ?string $description = null;
 
 
