@@ -6,6 +6,7 @@ use App\Entity\Pin;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Vich\UploaderBundle\Form\Type\VichImageType;
+use Symfony\Component\Validator\Constraints\Image;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class PinType extends AbstractType
@@ -23,7 +24,7 @@ class PinType extends AbstractType
         'download_label' => 'Télécharger',
         'download_uri' => true,
         // 'image_uri' => true,
-        // 'imagine_pattern' => '...',
+        // 'imagine_pattern' => 'squared_thumbnail_medium',
         // 'asset_helper' => true,
         ])
         ;
