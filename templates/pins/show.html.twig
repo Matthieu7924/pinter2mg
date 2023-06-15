@@ -11,7 +11,7 @@
                     <img class="" src="{{ pin.imageName ? vich_uploader_asset(pin) : asset('build/images/placeholder.jpeg')}}" style="width: 300px; height: 300px;" alt="{{ pin.title }}">
                 </a>
             </div>
-            <h2 class="pl-3 pt-3 h-5 text-muted"><a href="{{ path('app_pins_show', {id: pin.id}) }}" class="text-muted text-decoration-none" >{{ pin.title }} </a></h2>
+            <h1 class="pl-3 pt-3 h-5 text-muted"><a href="{{ path('app_pins_show', {id: pin.id}) }}" class="text-muted text-decoration-none" >{{ pin.title }} </a></h1>
             <p class="pl-3 pb-3 text-muted">
                 <small>
                     Submitted 
