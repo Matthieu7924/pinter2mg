@@ -1,5 +1,6 @@
 liip_imagine:
-    driver: "gd"
+    driver: "imagick"
+
     filter_sets:
         squared_thumbnail_medium:
             filters:

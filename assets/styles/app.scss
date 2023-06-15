@@ -27,6 +27,21 @@
         }
     }
 
+    .pin img{
+        &:hover{
+            transform:scale(1.075)        ;
+            -webkit-transform:scale(1.075)        ;
+            -moz-transform:scale(1.075)        ;
+            -ms-transform:scale(1.075)        ;
+            -o-transform:scale(1.075)        ;
+            transition: transform 0.3s ease-out;
+            -webkit-transition: transform 0.3s ease-out;
+            -moz-transition: transform 0.3s ease-out;
+            -ms-transition: transform 0.3s ease-out;
+            -o-transition: transform 0.3s ease-out;
+}
+    }
+
 
     .alert {
         padding: 10px;

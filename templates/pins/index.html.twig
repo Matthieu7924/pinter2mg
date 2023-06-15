@@ -3,15 +3,29 @@
 {% block title 'test' %} 
 
 {% block body %}
-<h1>{{ pluralize(pins|length, 'Pin', 'Pins') }}</h1>
+    {% if pins|length >0 %}
+    <h1 class="mb-4 text-center text-muted ">{{ pluralize(pins|length, 'Pin', 'Pins') }}</h1>
 
-    {% for pin in pins %}
-            <article>
-                <h2><a href="{{ path('app_pins_show', {id: pin.id}) }}">{{ pin.title }}</a></h2>
-                <p>{{pin.description|u.truncate(50, '...', false) }}</p>
-                {# <p>Crée {{ pin.createdAt|date }} #}
-                <p>Crée {{ pin.createdAt|ago }}
-            </article>
-    {% endfor %}
+        {% for row in pins|batch(3) %}
+            <div class="row mb-5">
+                {% for pin in row %}
+                    <div class="col-md-4">
+                        <article class="pin bg-white rounded shadow">
+                            <div class="mw-100 overflow-hidden">
+                                <a href="{{ path('app_pins_show', {id: pin.id}) }}">
+                                    <img class="w-100 rounded-top" src="{{ pin.imageName ? vich_uploader_asset(pin) : asset('build/images/placeholder.jpeg')}}" alt="{{ pin.title }}">
+                                </a>
+                            </div>
+                            <h2 class="pl-3 pt-3 h-5 text-muted"><a href="{{ path('app_pins_show', {id: pin.id}) }}" class="text-muted text-decoration-none">{{ pin.title }}</a></h2>
+                            {# <p>Crée {{ pin.createdAt|date }} #}
+                            {# <p>Crée {{ pin.createdAt|ago }} #}
+                            <p class="pl-3 pb-3 text-muted"><small>Submitted [OWNER FULL NAME]</small></p>
+                        </article>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    {% else %}<p class="mt-5 h1 text-center">No pins yet <a href="{{ path('app_pins_create') }}">Be the first</a></p>
+    {% endif %}
 {% endblock %}
 
