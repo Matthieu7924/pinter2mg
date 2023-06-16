@@ -59,6 +59,10 @@ class Pin
      */
     private $imageSize;
 
+    #[ORM\ManyToOne(inversedBy: 'pins')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
+
     public function __construct()
     {
         // Initialiser la propriété imageSize avec une valeur par défaut si nécessaire
@@ -153,6 +157,18 @@ class Pin
     public function setImageName(?string $imageName): static
     {
         $this->imageName = $imageName;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }
