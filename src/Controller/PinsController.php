@@ -98,8 +98,10 @@ class PinsController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid())
         {
-            $thao = $userRepo->findOneBy(['email' => 'thaogarban@gmail.com']);
-            $pin->setuser($thao);
+            // $thao = $userRepo->findOneBy(['email' => 'thaogarban@gmail.com']);
+            // $pin->setuser($thao);
+
+            $pin->setUser($this->getUser());
             $em->persist($pin);
             $em->flush();
 

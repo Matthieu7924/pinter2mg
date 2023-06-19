@@ -15,7 +15,6 @@ security:
             security: false
         main:
             lazy: true
-            anonymous: true
             provider: app_user_provider
             custom_authenticator: App\Security\LoginFormAuthenticator
             logout:
