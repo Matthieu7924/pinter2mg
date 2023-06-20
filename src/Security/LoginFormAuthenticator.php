@@ -46,7 +46,7 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
 
         $session = $request->getSession();
         if ($session instanceof \Symfony\Component\HttpFoundation\Session\Session) {
-            $session->getFlashBag()->add('success', 'Welcome'. $token->getUser()->firstName);
+            $session->getFlashBag()->add('success', 'Welcome '. $token->getUser()->firstName);
         }        
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);
