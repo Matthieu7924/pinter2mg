@@ -28,7 +28,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 255, unique: true)]
-    #[Assert\Email(message: "L'email n'est pas valide")]
+    #[Assert\Email(message: "Veuillez entrer une adresse e-mail valide.")]
     private ?string $email = null;
 
     #[ORM\Column]
@@ -41,11 +41,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: 'Le prénom ne peut pas être vide.')]
+    #[Assert\NotBlank(message: "Merci de renseigner un prénom.")]
     public ?string $firstName = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: 'Le nom ne peut pas être vide.')]
+    #[Assert\NotBlank(message: "Merci de renseigner un nom.")]
     private ?string $lastName = null;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Pin::class, orphanRemoval: true)]

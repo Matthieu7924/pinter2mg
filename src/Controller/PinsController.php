@@ -154,10 +154,18 @@ class PinsController extends AbstractController
         return $this->redirectToRoute('app_home');
     }
 
+    // /**
+    //  * @Route{"/pins{id<(0-9)->}", name="app_pins_delete", methods=("DELETE")}
+    //  */
+    // public function delete(Request $request, Pin $pin, EntityManagerInterface $em):Response
+    // {
+    //     if($this->isCsrfTokenValid('pin_deletion_' . $pin->getId(), $request->get('csrf_token'))) {
+    //         $em->remove($pin);
+    //         $em->flush();
 
-
-
-
-
-
+    //         $this->addFlash('info', 'Pin successfully deleted');
+    //     }
+    
+    //     return $this->redirectToRoute('app_home');
+    // }
 }

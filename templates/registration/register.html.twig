@@ -12,19 +12,17 @@
 
         <h1 class="my-5 text-center">Create an account</h1>
 
-        {{ form_errors(registrationForm) }}
-
-        <div class="row">
-            <div class="col-md-6">
-                {{ form_row(registrationForm.firstName) }}
-            </div>
-            <div class="col-md-6">
-                {{ form_row(registrationForm.lastName) }}
-            </div>
-        
-        </div>
-
         {{ form_start(registrationForm) }}
+
+            <div class="row">
+                <div class="col-md-6">
+                    {{ form_row(registrationForm.firstName) }}
+                </div>
+                <div class="col-md-6">
+                    {{ form_row(registrationForm.lastName) }}
+                </div>
+            </div>
+
             {{ form_row(registrationForm.email) }}
             {{ form_row(registrationForm.plainPassword, {
                 label:'password'
@@ -32,9 +30,9 @@
             {{ form_row(registrationForm.agreeTerms) }}
 
             <button type="submit" class="btn btn-primary btn-lg btn-block" formnovalidate>Register</button>
+        {{ form_end(registrationForm) }}
 
             <p class="mt-5 mb-3 text-center text-muted">Already have an account <a href="{{ path('app_login') }}">Login</a></p>
-        {{ form_end(registrationForm) }}
         </div>
     </div>
 {% endblock %}
