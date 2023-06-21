@@ -28,3 +28,14 @@ services:
     App\Entity\Pin:
         autowire: true
         autoconfigure: true
+
+    # App\Repository\ResetPasswordRequestRepository:
+    #     parent: Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository
+    #     arguments:
+    #         - '@doctrine.orm.default_entity_manager'
+    #     tags: ['doctrine.repository_service']
+
+    App\Repository\:
+        resource: '../src/Repository'
+        autowire: true
+        tags: ['doctrine.repository_service']
