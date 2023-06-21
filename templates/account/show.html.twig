@@ -1,0 +1,23 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %} Profile {% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-6 mx-auto text-center">
+            <h1 class="m-5" >Profile</h1>
+            {# <img src="https://www.gravatar.com/avatar/b22b8ad9c0cf4bf9884d7d661c9398f2/?s=100" alt=""> #}
+            {# hardcodé avec md5('rduris@gmail.com') effectué dans psysh #}
+            <img src="https://www.gravatar.com/avatar/{{ app.user.gravatar }}/?s=100" alt="Avatar de {{ app.user.fullName }}" class="shadow rounded-circle">
+            
+
+	
+
+
+            <p class="mt-5 lead">{{ app.user.email }}</p>
+            <h2>{{ app.user.fullName }}</h2>
+            <p><a href="">Edit Account</a> <a href="">Change password</a><p>
+        
+        </div>
+    </div>
+{% endblock %} 
