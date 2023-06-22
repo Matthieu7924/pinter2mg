@@ -11,6 +11,12 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\LegacyPasswordAuthenticatedUserTrait;
+use Symfony\Component\HttpFoundation\File\File;
+
+
+
+
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name:"users")]
@@ -53,6 +59,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\Image(mimeTypes="image/jpeg,image/png", maxSize="5M")
+     */
+    private ?string $profileImage = null;
+
+
+
+
 
     public function __construct()
     {
@@ -204,4 +220,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function getProfileImage(): ?string
+    {
+        return $this->profileImage;
+    }
+
+    public function setProfileImage(?string $profileImage): self
+    {
+        $this->profileImage = $profileImage;
+
+        return $this;
+    }
+
+    
 }

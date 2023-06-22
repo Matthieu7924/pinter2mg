@@ -6,6 +6,10 @@ use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+
 
 class UserFormType extends AbstractType
 {
@@ -13,8 +17,12 @@ class UserFormType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class)
-            ->add('firstName', textType::class)
+            ->add('firstName', TextType::class)
             ->add('lastName', TextType::class)
+            // ->add('profileImage', FileType::class, [
+            //     'label' => 'Profile Image',
+            //     'required' => false,
+            // ]);
         ;
     }
 
