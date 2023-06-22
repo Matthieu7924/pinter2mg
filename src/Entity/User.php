@@ -60,14 +60,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
 
-    /**
-     * @ORM\Column(type="string", nullable=true)
-     * @Assert\Image(mimeTypes="image/jpeg,image/png", maxSize="5M")
-     */
-    private ?string $profileImage = null;
+
+    // #[ORM\Column(type: 'string', nullable: true)]
+    // #[Assert\Image(mimeTypes: ["image/jpeg", "image/png"], maxSize: "5M")]
+    // private ?string $profileImage = null;
 
 
-
+    // /**
+    //  * @ORM\Column(type="string", nullable=true)
+    //  * @Assert\Image(mimeTypes="image/jpeg,image/png", maxSize="5M")
+    //  */
+    // private ?string $profileImage = null;
 
 
     public function __construct()
@@ -204,7 +207,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->getFirstName() . ' ' .$this->getLastName();
     }
 
-    public function getGravatar():string
+
+    public function getGravatarUrl():string
     {
         return 'https://www.gravatar.com/avatar/'. md5(strtolower(trim($this->getEmail()))) .'/?s=100';
     }
@@ -221,17 +225,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getProfileImage(): ?string
-    {
-        return $this->profileImage;
-    }
+    // public function getProfileImage(): ?string
+    // {
+    //     return $this->profileImage;
+    // }
 
-    public function setProfileImage(?string $profileImage): self
-    {
-        $this->profileImage = $profileImage;
+    // public function setProfileImage(?string $profileImage): self
+    // {
+    //     $this->profileImage = $profileImage;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     
 }

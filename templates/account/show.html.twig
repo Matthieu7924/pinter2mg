@@ -8,7 +8,7 @@
             <h1 class="m-5" >Profile</h1>
             {# <img src="https://www.gravatar.com/avatar/b22b8ad9c0cf4bf9884d7d661c9398f2/?s=100" alt=""> #}
             {# hardcodé avec md5('rduris@gmail.com') effectué dans psysh #}
-            <img src="https://www.gravatar.com/avatar/{{ app.user.gravatar }}/?s=100" alt="Avatar de {{ app.user.fullName }}" class="shadow rounded-circle">
+            <img src="https://www.gravatar.com/avatar/{{ app.user.gravatarUrl }}/?s=100" alt="Avatar de {{ app.user.fullName }}" class="shadow rounded-circle">
             
             <p class="mt-5 lead">{{ app.user.email }}</p>
             <p><small>Account created on {{ app.user.createdAt|date('d/m/y') }}
