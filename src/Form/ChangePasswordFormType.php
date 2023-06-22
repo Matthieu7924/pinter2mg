@@ -20,6 +20,9 @@ class ChangePasswordFormType extends AbstractType
         $builder
             ->add('currentPassword', PasswordType::class, [
                 'label' => 'Current Password',
+                'attr' =>[
+                    'autocomplete' =>'off'
+                ],
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Please enter your current password'

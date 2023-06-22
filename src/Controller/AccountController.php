@@ -17,16 +17,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
+#[Route('/account')]
 
 class AccountController extends AbstractController
 {
-    #[Route('/account', name: 'app_account')]
+    #[Route('/', name: 'app_account')]
     public function show(): Response
     {
         return $this->render('account/show.html.twig');
     }
 
-    #[Route('/account/edit', name: 'app_account_edit', methods:['GET','POST'])]
+    #[Route('/edit', name: 'app_account_edit', methods:['GET','POST'])]
     public function edit(Request $request, EntityManagerInterface $em): Response
     // public function edit(Request $request, EntityManagerInterface $em, FileUploader $fileUploader): Response
 
@@ -56,7 +57,7 @@ class AccountController extends AbstractController
     }
 
 
-    #[Route('/account/change-password', name: 'app_account_change_password', methods:['GET','POST'])]
+    #[Route('/change-password', name: 'app_account_change_password', methods:['GET','POST'])]
 public function changePassword(Request $request, EntityManagerInterface $em, UserPasswordHasherInterface $passwordHasher): Response
 {
     $user = $this->getUser();
