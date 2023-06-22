@@ -61,7 +61,9 @@ public function changePassword(Request $request, EntityManagerInterface $em, Use
 {
     $user = $this->getUser();
     // dd($user);
-    $form = $this->createForm(ChangePasswordFormType::class);
+    $form = $this->createForm(ChangePasswordFormType::class, null, [
+        'current_password_is_required'=>true
+    ]);
     $form->handleRequest($request);
 
     if($form->isSubmitted() && $form->isValid())
