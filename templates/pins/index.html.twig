@@ -19,7 +19,7 @@
                             <h2 class="pl-3 pt-3 h-5 text-muted"><a href="{{ path('app_pins_show', {id: pin.id}) }}" class="text-muted text-decoration-none">{{ pin.title }}</a></h2>
                             {# <p>Crée {{ pin.createdAt|date }} #}
                             {# <p>Crée {{ pin.createdAt|ago }} #}
-                            <p class="pl-3 pb-3 text-muted"><small>Submitted by {{ pin.user.firstName }}</small></p>
+                            <p class="pl-3 pb-3 text-muted"><small>Submitted by {{ pin.user.fullName }}</small></p>
                             {# <a href="#" onclick="event.preventDefault();confirm('Are you sure ?') && document.getElementById('js-pin-delete-form-{{ pin.id }}').submit();" class="m-3 btn btn-danger">&times; Delete</a>
                         
                             <form id="js-pin-delete-form-{{ pin.id }}" action="{{ path('app_pins_delete', {id: pin.id}) }}" method="POST" style="display:none;">
