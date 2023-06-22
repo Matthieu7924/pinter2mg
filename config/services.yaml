@@ -20,7 +20,9 @@ services:
             $targetDirectory: '%kernel.project_dir%/public/uploads'
         autowire: true
 
-
+    # session.flash_bag:
+    #     alias: Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface
+    
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
     App\:
