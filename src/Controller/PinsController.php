@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Pin;
+use App\Entity\User;
 use App\Form\PinType;
 use App\Repository\PinRepository;
 use App\Repository\UserRepository;
@@ -15,6 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\Loader\Configurator\security;
 
 class PinsController extends AbstractController
 {
@@ -43,7 +45,21 @@ class PinsController extends AbstractController
     // #[Route('/pins/create', name: 'app_pins_create', methods: ['GET', 'POST'])]
     public function create(Request $request, EntityManagerInterface $em, UserRepository $userRepo): Response
     {
-        
+        if(! $this->getUser())
+        {
+            // $this->addFlash('error', 'you need to log in first');
+            // return $this->redirectToRoute('app_login');
+            $this->denyAccessUnlessGranted('ROLE_USER');
+        }
+
+        if(! $this->getUser()->isVerified())
+        //attention l'ordre des vérifications est important
+        {
+            $this->addFlash('error', 'you need to have a verified account');
+            return $this->redirectToRoute('app_home');
+        }
+
+
         // // version 1
         // $form = $this->createFormBuilder()
         //         ->add('title', TextType::class)
@@ -114,37 +130,104 @@ class PinsController extends AbstractController
     }
 
     //EDIT
-    #[Route('/pins/{id}/edit', name: 'app_pins_edit', methods: ['GET', 'PUT','POST'])]
-    
-    public function edit(Request $request, EntityManagerInterface $em, int $id, PinRepository $pinRepository):Response
+    #[Route('/pins/{id}/edit', name: 'app_pins_edit', methods: ['GET', 'PUT', 'POST'])]
+    public function edit(Request $request, EntityManagerInterface $em, PinRepository $pinRepository, int $id): Response
     {
-        $pin = $pinRepository->find($id);
-
-        $form = $this->createForm(PinType::class, $pin);
-
-        $form->handleRequest($request);
-
-        if($form->isSubmitted() && $form->isValid())
-        {
-            // $em->persist($pin);
-            $em->flush();
-            $this->addFlash('success', 'Pin successfully updated');
-
-
+        $user = $this->getUser();
+    
+        if (!$user) {
+            $this->addFlash('error', 'You need to log in first');
+            return $this->redirectToRoute('app_login');
+        }
+    
+        if (!$user->isVerified()) {
+            $this->addFlash('error', 'You need to have a verified account');
             return $this->redirectToRoute('app_home');
         }
-
+    
+        $pin = $pinRepository->find($id);
+    
+        if (!$pin) {
+            throw $this->createNotFoundException('Pin not found');
+        }
+    
+        if ($pin->getUser() !== $user) {
+            $this->addFlash('error', 'Access forbidden');
+            return $this->redirectToRoute('app_home');
+        }
+    
+        $form = $this->createForm(PinType::class, $pin);
+        $form->handleRequest($request);
+    
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->flush();
+            $this->addFlash('success', 'Pin successfully updated');
+            return $this->redirectToRoute('app_home');
+        }
+    
         return $this->render('pins/edit.html.twig', [
             'pin' => $pin,
             'form' => $form->createView()
         ]);
     }
 
+
+    //DELETE
     #[Route('/pins/{id}', name: 'app_pins_delete', methods: ['DELETE','POST'])]
     public function delete(Request $request, Pin $pin, EntityManagerInterface $em, int $id, PinRepository $pinRepository, CsrfTokenManagerInterface $csrfTokenManager): Response
     {
 
+        $user = $this->getUser();
+
+        if (!$user) {
+            $this->addFlash('error', 'You need to log in first');
+            return $this->redirectToRoute('app_login');
+        }
+    
+        if (!$user->isVerified()) {
+            $this->addFlash('error', 'You need to have a verified account');
+            return $this->redirectToRoute('app_home');
+        }
         $pin = $pinRepository->find($id);
+
+        if (!$pin) {
+            throw $this->createNotFoundException('Pin not found');
+        }
+
+        if (!$user->isUserAllowedToDelete($pin)) {
+            $this->addFlash('error', 'Access forbidden');
+            return $this->redirectToRoute('app_home');
+        }
+
+        // if(! $this->getUser())
+        // {
+        //     $this->addFlash('error', 'you need to log in first');
+        //     return $this->redirectToRoute('app_login');
+        // }
+
+        // if(! $this->getUser()->isVerified())
+        // {
+        //     $this->addFlash('error', 'you need to have a verified account');
+        //     return $this->redirectToRoute('app_home');
+        // }
+
+        // if($pin->getUser() != $this->getUser())
+        // {
+        //     $this->addFlash('error', 'Acces forbidden');
+        //     return $this->redirectToRoute('app_home');
+        // }
+
+        // $pin = $pinRepository->find($id);
+
+
+        // if (!$pin) {
+        //     throw $this->createNotFoundException('Pin not found');
+        // }
+    
+        // if (!$this->isUserAllowedToDelete($user, $pin)) {
+        //     $this->addFlash('error', 'Access forbidden');
+        //     return $this->redirectToRoute('app_home');
+        // }
 
         $em->remove($pin);
         $em->flush();
