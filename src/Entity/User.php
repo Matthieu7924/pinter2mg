@@ -237,5 +237,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     //     return $this;
     // }
 
+
+    public function hasRole(string $role): bool
+{
+    return in_array($role, $this->getRoles(), true);
+}
+
+public function isUserAllowedToDelete(Pin $pin): bool
+    {
+        // Vérifier si l'utilisateur a le rôle approprié pour supprimer les pins
+        if ($this->hasRole('ROLE_ADMIN')) {
+            return true; // L'administrateur peut supprimer tous les pins
+        }
+
+        // Vérifier si l'utilisateur est le propriétaire du pin
+        if ($this->hasRole('ROLE_USER') && $this === $pin->getUser()) {
+            return true; // Le propriétaire peut supprimer son propre pin
+        }
+
+        // Ajoutez d'autres vérifications personnalisées selon vos besoins
+
+        return false; // Par défaut, l'utilisateur n'est pas autorisé à supprimer le pin
+    }
+
     
 }

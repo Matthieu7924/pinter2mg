@@ -1,0 +1,20 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block body %}
+    <h1>Admin Pins</h1>
+
+    {# {% if is_granted('ROLE_USER') %}
+        <p>Cool Simple User</p>
+    {% endif %} #}
+
+    {% if is_granted('ROLE_USER') and app.user.isVerified %}
+        <p>Cool User Verified</p>
+    {% endif %}
+
+    {% if is_granted('ROLE_ADMIN') and app.user.isVerified and app.user == pin.user %}
+        <p>Cool Admin Jackpot $$$</p>
+    {% endif %}
+
+
+
+{% endblock %}

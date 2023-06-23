@@ -20,6 +20,10 @@ services:
             $targetDirectory: '%kernel.project_dir%/public/uploads'
         autowire: true
 
+    App\Security\Voter\PinVoter:
+        autowire: true
+        autoconfigure: true
+
     # session.flash_bag:
     #     alias: Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface
     
