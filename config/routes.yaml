@@ -1,3 +1,7 @@
 controllers:
     resource: ../src/Controller/
     type: attribute
+
+change_locale:
+    path: /change-locale/{locale}
+    controller: App\Controller\LanguageController::changeLocale

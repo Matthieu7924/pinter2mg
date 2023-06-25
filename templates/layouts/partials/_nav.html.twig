@@ -1,6 +1,20 @@
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark mb-4" aria-label="Third navbar example">
     <div class="container-fluid">
         <a class="navbar-brand" href="{{ path('app_home') }}">Panter2</a>
+        <ul class="navbar-nav">
+            {% for locale in locales %}
+                {% if locale != app.request.locale %}                    
+                    {% set imageNames = {'en': 'anglais.c25d7e1f.png', 'fr': 'français.a372128b.png'} %}
+                    {% set imageName = imageNames[locale] %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('change_locale', {'locale': locale}) }}">
+                            <img src="{{ asset('build/images/' ~ imageName) }}" alt="{{ locale }}" style="width:35px;height:25px;">
+                        </a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+        {# {{ dump(locales) }} #}
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -9,14 +23,19 @@
             <ul class="navbar-nav ms-auto mb-2 mb-sm-0">
                 {% if app.user %}
                 <li class="nav-item ml-sm-2">
-                    <a class="nav-link" href="{{ path('app_pins_create') }}">New Pin</a>
+                    <a class="nav-link" href="{{ path('app_pins_create') }}">{% trans %}New Pin{% endtrans %}</a>
                 </li>
                 <li class="nav-item ml-sm-2">
-                    <a class="nav-link" href="{{ path('app_account') }}">Account</a>
+                    <a class="nav-link" href="{{ path('app_account') }}">{% trans %}Account{% endtrans %}</a>
                 </li>
                 <li class="nav-item ml-sm-2">
-                    <a class="nav-link" href="#" onclick="event.preventDefault(); document.getElementById('js-logout-form').submit();">Logout</a>
+                    <a class="nav-link" href="#" onclick="event.preventDefault(); document.getElementById('js-logout-form').submit();">{% trans %}Logout{% endtrans %}</a>
                 </li>
+                {% if app.user.isAdmin %}
+                <li class="nav-item ml-sm-2">
+                    <a class="nav-link" href="{{ path('app_admin_index') }}">{% trans %}Admin{% endtrans %}</a>
+                </li>
+                {% endif %}
 
                 <form id="js-logout-form" action="{{ path('app_logout') }}"  method="POST" style="display: none;">
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('logout') }}">
@@ -24,10 +43,10 @@
 
                 {% else %}
                 <li class="nav-item ml-sm-2">
-                    <a class="nav-link" href="{{ path('app_register') }}">Register</a>
+                    <a class="nav-link" href="{{ path('app_register') }}">{% trans %}Register{% endtrans %}</a>
                 </li>
                 <li class="nav-item ml-sm-2">
-                    <a class="nav-link" href="{{ path('app_login') }}">Login</a>
+                    <a class="nav-link" href="{{ path('app_login') }}">{% trans %}Login{% endtrans %}</a>
                 </li>
                 {% endif %}
             </ul>

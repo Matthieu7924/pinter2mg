@@ -14,7 +14,7 @@
                 <h1 class="h-5 text-secondary">{{ pin.title }}</h1>
                 <p class="text-muted">
                     <small>
-                        Submitted 
+                        {% trans %}Submitted {% endtrans %}
                         <time datetime="{{ pin.createdAt|date('Y-m-d H:i:s') }}">{{ pin.createdAt|ago }}</time>
                         by {{ pin.user.fullName }}
                     </small>
@@ -23,10 +23,10 @@
                     {{ pin.description }}
                 </p>
 
-                {% if app.user == pin.user %}
+                {% if app.user == pin.user or 'ROLE_ADMIN' in app.user.roles %}
                 <div class="pt-3">
-                    <a href="{{ path('app_pins_edit', {id: pin.id}) }}" class="btn btn-light">Modifier</a>
-                    <a href="#" onclick="event.preventDefault();confirm('Are you sure ?') && document.getElementById('js-pin-delete-form').submit();"class="btn btn-light">Delete</a>
+                    <a href="{{ path('app_pins_edit', {id: pin.id}) }}" class="btn btn-light">{% trans %}Modifier{% endtrans %}</a>
+                    <a href="#" onclick="event.preventDefault();confirm('Are you sure ?') && document.getElementById('js-pin-delete-form').submit();"class="btn btn-light">{% trans %}Delete{% endtrans %}</a>
 
                     <form id="js-pin-delete-form" action="{{ path('app_pins_delete', {id: pin.id}) }}" method="POST" style="display:none;">
                         <input type="hidden" name="csrf_token" value="{{ csrf_token('pin_deletion_' ~ pin.id) }}">

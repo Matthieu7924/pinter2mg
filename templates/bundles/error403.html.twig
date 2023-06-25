@@ -3,11 +3,11 @@
 {% block body %}
 <div class="row">
     <div class="col-md-6 mx-auto">
-        <h1>Oops! An error Occured</h1>
+        <h1>{% trans %}Oops! An error Occured{% endtrans %}</h1>
 
-        <h2>The server returned a "403 Forbidden".</h2>
+        <h2>{% trans %}The server returned a "403 Forbidden".{% endtrans %}</h2>
     <p>
-        You cannot access this page. Go back to home <a href="{{ path('app_home') }}">return to the homepage</a>.
+        {% trans %}You cannot access this page. Go back to home {% endtrans %}<a href="{{ path('app_home') }}">return to the homepage</a>.
     </p>
     </div>
 </div>

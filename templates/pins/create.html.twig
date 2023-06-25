@@ -1,11 +1,11 @@
 {% extends 'layouts/base.html.twig' %}
 
-{% block title %}New pin{% endblock %}
+{% block title %}{% trans %}New pin{% endtrans %}{% endblock %}
 
 {% block body %}
 <div class="row">
     <div class="col-md-6 mx-auto">
-        <h1><a>Create Pin</a></h1>
+        <h1><a>{% trans %}Create Pin{% endtrans %}</a></h1>
         {{ include('pins/_form.html.twig', {'submitButtonText':'Create Pin'}) }}
     </div>
 </div>

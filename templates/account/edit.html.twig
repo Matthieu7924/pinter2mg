@@ -1,11 +1,11 @@
 {% extends 'layouts/base.html.twig' %}
 
-{% block title %} Edit {% endblock %}
+{% block title %} {% trans %}Edit{% endtrans %} {% endblock %}
 
 {% block body %}
     <div class="row">
         <div class="col-md-6 mx-auto text-center">
-            <h1 class="my-5 text-center" >Update Profile</h1>
+            <h1 class="my-5 text-center" >{% trans %}Update Profile{% endtrans %}</h1>
             
             {{ form_start(form) }}
             <div class="row">

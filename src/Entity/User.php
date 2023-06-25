@@ -61,9 +61,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $isVerified = false;
 
 
-    // #[ORM\Column(type: 'string', nullable: true)]
+    #[ORM\Column(type: 'string', nullable: true)]
     // #[Assert\Image(mimeTypes: ["image/jpeg", "image/png"], maxSize: "5M")]
-    // private ?string $profileImage = null;
+    private ?string $profileImage = null;
 
 
     // /**
@@ -225,25 +225,25 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    // public function getProfileImage(): ?string
-    // {
-    //     return $this->profileImage;
-    // }
+    public function getProfileImage(): ?string
+    {
+        return $this->profileImage;
+    }
 
-    // public function setProfileImage(?string $profileImage): self
-    // {
-    //     $this->profileImage = $profileImage;
+    public function setProfileImage(?string $profileImage): self
+    {
+        $this->profileImage = $profileImage;
 
-    //     return $this;
-    // }
+        return $this;
+    }
 
 
     public function hasRole(string $role): bool
-{
-    return in_array($role, $this->getRoles(), true);
-}
+    {
+        return in_array($role, $this->getRoles(), true);
+    }
 
-public function isUserAllowedToDelete(Pin $pin): bool
+    public function isUserAllowedToDelete(Pin $pin): bool
     {
         // Vérifier si l'utilisateur a le rôle approprié pour supprimer les pins
         if ($this->hasRole('ROLE_ADMIN')) {
@@ -260,5 +260,8 @@ public function isUserAllowedToDelete(Pin $pin): bool
         return false; // Par défaut, l'utilisateur n'est pas autorisé à supprimer le pin
     }
 
-    
+    public function isAdmin(): bool
+    {
+        return in_array('ROLE_ADMIN', $this->roles, true);
+    }
 }

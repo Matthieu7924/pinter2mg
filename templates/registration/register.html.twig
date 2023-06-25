@@ -1,6 +1,6 @@
 {% extends 'layouts/base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}{% trans %}Register{% endtrans %}{% endblock %}
 
 
 {% block body %}
@@ -10,7 +10,7 @@
             <div class="mb-3 alert alert-error rounded" role="alert">{{ flash_error }}</div>
         {% endfor %}
 
-        <h1 class="my-5 text-center">Create an account</h1>
+        <h1 class="my-5 text-center">{% trans %}Create an account{% endtrans %}</h1>
 
         {{ form_start(registrationForm) }}
 
@@ -32,7 +32,7 @@
             <button type="submit" class="btn btn-primary btn-lg btn-block" formnovalidate>Register</button>
         {{ form_end(registrationForm) }}
 
-            <p class="mt-5 mb-3 text-center text-muted">Already have an account <a href="{{ path('app_login') }}">Login</a></p>
+            <p class="mt-5 mb-3 text-center text-muted">{% trans %}Already have an account {% endtrans %}<a href="{{ path('app_login') }}">Login</a></p>
         </div>
     </div>
 {% endblock %}

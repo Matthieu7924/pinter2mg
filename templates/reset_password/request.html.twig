@@ -1,10 +1,10 @@
 {% extends 'layouts/base.html.twig' %}
 
-{% block title %}Reset your password{% endblock %}
+{% block title %}{% trans %}Reset your password{% endtrans %}{% endblock %}
 
 {% block body %}
     <div class="row">
-        <h1 class="mt-5 mb-3 text-center">Reset your password</h1>
+        <h1 class="mt-5 mb-3 text-center">{% trans %}Reset your password{% endtrans %}</h1>
 
         <div class="col-md-6 mx-auto">
             {% for flash_error in app.flashes('reset_password_error') %}
@@ -12,8 +12,8 @@
             {% endfor %}
 
                 <p class="mb-5 text-center text-muted">
-                    Enter your email address and we will send you a
-                    link to reset your password.
+                    {% trans %}Enter your email address and we will send you a
+                    link to reset your password.{% endtrans %}
                 </p>
 
             {{ form_start(requestForm) }}
@@ -22,7 +22,7 @@
                     
                 </div>
 
-                <button type="submit" class="btn btn-primary btn-lg btn-block">Send password reset email</button>
+                <button type="submit" class="btn btn-primary btn-lg btn-block">{% trans %}Send password reset email{% endtrans %}</button>
             {{ form_end(requestForm) }}
         </div>
     </div>

@@ -11,7 +11,7 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 class PinVoter extends Voter
 {
     public const EDIT = 'PIN_EDIT';
-    public const VIEW = 'PIN_VIEW';
+    public const CREATE = 'PIN_CREATE';
     public const DELETE = 'PIN_DELETE';
 
 
@@ -20,7 +20,7 @@ class PinVoter extends Voter
         // replace with your own logic
         // https://symfony.com/doc/current/security/voters.html
         // return in_array($attribute, [self::EDIT, self::VIEW])
-        return in_array($attribute, [self::EDIT, self::VIEW, self::DELETE]) && $subject instanceof Pin;
+        return in_array($attribute, [self::EDIT, self::CREATE, self::DELETE]) && $subject instanceof Pin;
     }
 
     protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
@@ -36,7 +36,7 @@ class PinVoter extends Voter
             case self::EDIT:
                 // Check if the user has the necessary role to edit pins
                 return $this->isUserAllowedToEdit($user, $subject);
-            case self::VIEW:
+            case self::CREATE:
                 // Check if the user has the necessary role to view pins
                 return $this->isUserAllowedToView($user, $subject);
             case self::DELETE:
