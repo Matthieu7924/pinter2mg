@@ -17,6 +17,16 @@ framework:
     php_errors:
         log: true
 
+    # cache:
+    #     pools:
+    #         cache.redis:
+    #             adapter: cache.adapter.redis
+    #             default_lifetime: 0
+    #             public: true
+    #             redis:
+    #                 host: '%env(REDIS_HOST)%'
+    #                 port: '%env(REDIS_PORT)%'
+
 
 
 
