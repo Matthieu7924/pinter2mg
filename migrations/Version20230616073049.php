@@ -11,29 +11,32 @@ final class Version20230616073049 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return 'Add users table';
+        return 'Add columns to the users table';
     }
 
     public function up(Schema $schema): void
     {
-        $tableName = 'users';
+        $table = $schema->getTable('users');
 
-        if (!$schema->hasTable($tableName)) {
-            $table = $schema->createTable($tableName);
-            
-            // Ajoutez ici les colonnes et les contraintes de la table 'users'
-            // Exemple :
-            /*
-            $table->addColumn('id', 'integer', ['autoincrement' => true]);
-            $table->addColumn('username', 'string', ['length' => 255]);
-            $table->addColumn('password', 'string', ['length' => 255]);
-            // ... Ajoutez d'autres colonnes et contraintes ...
-            */
+        if (!$table->hasColumn('first_name')) {
+            $table->addColumn('first_name', 'string', ['length' => 255]);
+        }
+
+        if (!$table->hasColumn('last_name')) {
+            $table->addColumn('last_name', 'string', ['length' => 255]);
         }
     }
 
     public function down(Schema $schema): void
     {
-        $schema->dropTable('users');
+        $table = $schema->getTable('users');
+
+        if ($table->hasColumn('first_name')) {
+            $table->dropColumn('first_name');
+        }
+
+        if ($table->hasColumn('last_name')) {
+            $table->dropColumn('last_name');
+        }
     }
 }
