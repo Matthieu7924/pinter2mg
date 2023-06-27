@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use user;
 use App\Entity\Pin;
 use App\Entity\User;
 use App\Form\PinType;
