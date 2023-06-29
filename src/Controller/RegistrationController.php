@@ -61,7 +61,7 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
-        dump($form->getErrors(true));
+        // dump($form->getErrors(true));
 
             $em->persist($user);
             $em->flush();
