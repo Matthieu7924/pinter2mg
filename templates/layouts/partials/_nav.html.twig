@@ -14,6 +14,11 @@
                 {% endif %}
             {% endfor %}
         </ul>
+        {% if app.user %}
+            <li>
+                <p class="p-2" style="color:blue;background-color:pink">{{ app.user.firstname }}</p>
+            </li>
+        {% endif %}
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -29,7 +34,7 @@
                 </li>
                 <li class="nav-item ml-sm-2">
                     <a class="nav-link" href="#" onclick="event.preventDefault(); document.getElementById('js-logout-form').submit();">{% trans %}Logout{% endtrans %}</a>
-                </li>
+                </li> 
                 {% if app.user.isAdmin %}
                 <li class="nav-item ml-sm-2">
                     <a class="nav-link" href="{{ path('app_admin_index') }}">{% trans %}Admin{% endtrans %}</a>
