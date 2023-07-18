@@ -71,8 +71,10 @@ class RegistrationController extends AbstractController
                 (new TemplatedEmail())
                     // ->from(new Address($_ENV['MAIL_FROM_ADRESS'], $_ENV['MAIL_FROM_NAME']))
                     ->from(new Address(
-                        $this->getParameter('app.mail_from_adress'), 
-                        $this->getParameter('app.mail_from_name')
+                        // $this->getParameter('app.mail_from_adress'), 
+                        // $this->getParameter('app.mail_from_name')
+                        $this->getParameter('MAIL_FROM_ADRESS'),
+                        $this->getParameter('MAIL_FROM_NAME')
                     ))
                     ->to($user->getEmail())
                     ->subject('Please Confirm your Email')

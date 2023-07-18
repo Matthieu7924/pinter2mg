@@ -2,5 +2,6 @@ framework:
     mailer:
         dsn: '%env(MAILER_DSN)%'
         # dsn: 'smtp://c671a96eb4ed1cdf4832a8c9f30e60d0:46c2ae0d46eb739c0edfe01de86de8fc@in-v3.mailjet.com:587?encryption=tls&auth_mode=login'
+        # dsn: 'sendinblue+smtp://pft5MWbjO67Av8Fh@default'
 
     
