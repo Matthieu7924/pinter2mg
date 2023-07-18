@@ -24,6 +24,8 @@ class PinsController extends AbstractController
     public function index(PinRepository $pinRepository): Response
     {
         $pins = $pinRepository->findBy([], ['createdAt' => 'DESC']);
+        // Vérifier si la liste de pins est vide
+        $noPinsYet = empty($pins);
         return $this->render('pins/index.html.twig', compact('pins'));
     }
 

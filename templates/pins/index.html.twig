@@ -3,9 +3,8 @@
 {% block title 'test' %} 
 
 {% block body %}
-    {% if pins|length >0 %}
-    <h1 class="mb-4 text-center text-muted ">{{ pluralize(pins|length, 'Pin', 'Pins') }}</h1>
-
+    {% if pins|length > 0 %}
+        <h1 class="mb-4 text-center text-muted ">{{ pluralize(pins|length, 'Pin', 'Pins') }}</h1>
         {% for row in pins|batch(3) %}
             <div class="row mb-5">
                 {% for pin in row %}
@@ -31,7 +30,7 @@
                 {% endfor %}
             </div>
         {% endfor %}
-    <p class="mt-5 h1 text-center">{% trans %}No pins yet{% endtrans %} <a href="{{ path('app_pins_create') }}">{% trans %}Be the first{% endtrans %}</a></p>
+    {% else %}
+        <p class="mt-5 h1 text-center">{% trans %}No pins yet{% endtrans %} <a href="{{ path('app_pins_create') }}">{% trans %}Be the first{% endtrans %}</a></p>
     {% endif %}
 {% endblock %}
-
