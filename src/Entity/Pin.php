@@ -18,10 +18,7 @@ use Vich\UploaderBundle\Entity\File as EmbeddedFile;
 #[ORM\Entity(repositoryClass: PinRepository::class)]
 #[ORM\Table(name: "pins")]
 #[ORM\HasLifecycleCallbacks]
-/**
- * @ORM\Entity
- * @Vich\Uploadable
- */
+#[Vich\Uploadable]
 class Pin
 {
 
